@@ -10,6 +10,16 @@ type Store = {
   score: number;
   gameOver: boolean;
   gamePaused: boolean;
+  // Actions:
+  restart: () => void;
+  updateBoard: () => void;
+  moveDown: () => void;
+  setCurrentBlock: (block: BlockMetadata) => void;
+  prepareForNext: () => void;
+  moveLeft: () => void;
+  moveRight: () => void;
+  toggleGamePause: () => void;
+  setGameOver: () => void;
 };
 
 export const useStore = create<Store>((set) => ({
@@ -100,7 +110,7 @@ export const useStore = create<Store>((set) => ({
         },
       };
     }),
-  setCurrentBlock: (block: BlockMetadata) =>
+  setCurrentBlock: (block) =>
     set((state) => ({ ...state, currentBlock: block })),
   prepareForNext: () =>
     set((state) => {

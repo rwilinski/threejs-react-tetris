@@ -4,6 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import { Grid } from "./components/Grid";
 import { Hud } from "./components/Hud";
+import { Game } from "./components/Game";
 import { GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
       <Hud />
 
-      {/* <Game /> */}
+      <Game />
     </Canvas>
   );
 }
