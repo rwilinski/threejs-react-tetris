@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Canvas } from "react-three-fiber";
+import { OrbitControls } from "@react-three/drei";
+
+import { Grid } from "./components/Grid";
+import { Hud } from "./components/Hud";
+import { GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
+  const cameraPosition = [GRID_WIDTH / 2, GRID_HEIGHT / 2, 150]; // middle of the grid
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Canvas
+      shadowMap
+      camera={{ fov: 75, position: cameraPosition }}
+      style={{ backgroundColor: "#eeeeee" }}
+    >
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+
+      <hemisphereLight args={[0xffffff, 0x000000]} position={[0, 20, 20]} />
+
+      {/* @ts-ignore */}
+      <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
+
+      <Grid />
+
+      <Hud />
+
+      {/* <Game /> */}
+    </Canvas>
   );
 }
 
