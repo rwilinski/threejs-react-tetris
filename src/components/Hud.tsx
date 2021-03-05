@@ -3,6 +3,7 @@ import React from "react";
 import { useStore } from "../game/store";
 import { GRID_WIDTH, GRID_HEIGHT } from "../game/constants";
 import { RenderText } from "./RenderText";
+import { BlockPreview } from "./BlockPreview";
 
 export function Hud() {
   const state = useStore();
@@ -32,7 +33,7 @@ export function Hud() {
         {state.score}
       </RenderText>
 
-      {/* {state.nextBlock && <BlockPreview block={state.nextBlock} />} */}
+      {state.nextBlock && <BlockPreview block={state.nextBlock} />}
     </>
   );
 }
