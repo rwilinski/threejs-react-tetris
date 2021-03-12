@@ -6,7 +6,8 @@ export function RenderText({ children, ...props }: any) {
     <Text
       color="#111"
       fontSize={18}
-      font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+      font="/fonts/Raleway/static/Raleway-Thin.ttf"
+      textAlign="center"
       {...props}
     >
       {children}
