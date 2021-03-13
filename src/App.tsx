@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "react-three-fiber";
 import { OrbitControls } from "@react-three/drei";
+// @ts-ignore
+import { preloadFont } from "troika-three-text";
 
 import { Grid } from "./components/Grid";
 import { Hud } from "./components/Hud";
 import { Game } from "./components/Game";
-import { GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
+import { FONT, GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
   const cameraPosition = [GRID_WIDTH / 2, GRID_HEIGHT / 2, 150]; // middle of the grid
+
+  const [isFontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    preloadFont({ font: FONT }, () => setFontLoaded(true));
+  }, []);
 
   return (
     <Canvas
@@ -24,11 +32,15 @@ function App() {
       {/* @ts-ignore */}
       <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
 
-      <Grid />
+      {isFontLoaded && (
+        <>
+          <Grid />
 
-      <Hud />
+          <Hud />
 
-      <Game />
+          <Game />
+        </>
+      )}
     </Canvas>
   );
 }
