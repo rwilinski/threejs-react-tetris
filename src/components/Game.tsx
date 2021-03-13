@@ -26,7 +26,7 @@ export function Game() {
   const canAddNewBlock = () => {
     let canBePlaced = true;
 
-    state.nextBlock.path.forEach((item) => {
+    state.nextBlock!.path.forEach((item) => {
       const cell = state.board[item[1]][item[0]];
 
       if (cell) {
@@ -38,11 +38,11 @@ export function Game() {
   };
 
   const rotate = () => {
-    const { path, defaultPath } = state.currentBlock;
+    const { path, defaultPath } = state.currentBlock!;
     const offsetLeft = path[0][0] - defaultPath[0][0];
     const offsetTop = path[0][1] - defaultPath[0][1];
 
-    const next = rotateBlock(state.currentBlock);
+    const next = rotateBlock(state.currentBlock!);
 
     let canRotate = true;
 
@@ -74,7 +74,7 @@ export function Game() {
   const moveLeft = () => {
     let canMove = true;
 
-    state.currentBlock.path.forEach((item) => {
+    state.currentBlock!.path.forEach((item) => {
       const cell = state.board[item[1]][item[0] - 1];
 
       if (!(item[0] - 1 >= 0) || (cell && !isCellActive(cell))) {
@@ -91,7 +91,7 @@ export function Game() {
   const moveRight = () => {
     let canMove = true;
 
-    state.currentBlock.path.forEach((item) => {
+    state.currentBlock!.path.forEach((item) => {
       const cell = state.board[item[1]][item[0] + 1];
 
       if (!(item[0] + 1 < BOARD_WIDTH) || (cell && !isCellActive(cell))) {
@@ -168,7 +168,7 @@ export function Game() {
 
       state.board.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
-          state.currentBlock.path.forEach((item) => {
+          state.currentBlock!.path.forEach((item) => {
             if (
               (cell &&
                 !isCellActive(cell) &&
@@ -204,11 +204,6 @@ export function Game() {
     gameInterval,
     { immediate: false }
   );
-
-  useEffect(() => {
-    startNewGame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>

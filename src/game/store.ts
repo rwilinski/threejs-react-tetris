@@ -5,8 +5,8 @@ import { BlockMetadata, getRandomBlockAndCenter, isCellActive } from "./blocks";
 
 type Store = {
   board: string[][];
-  currentBlock: BlockMetadata;
-  nextBlock: BlockMetadata;
+  currentBlock: BlockMetadata | null;
+  nextBlock: BlockMetadata | null;
   score: number;
   gameOver: boolean;
   gamePaused: boolean;
@@ -24,10 +24,10 @@ type Store = {
 
 export const useStore = create<Store>((set) => ({
   board: [],
-  currentBlock: getRandomBlockAndCenter(BOARD_WIDTH),
-  nextBlock: getRandomBlockAndCenter(BOARD_WIDTH),
+  currentBlock: null,
+  nextBlock: null,
   score: 0,
-  gameOver: false,
+  gameOver: true,
   gamePaused: false,
   // Actions:
   restart: () =>
@@ -59,10 +59,10 @@ export const useStore = create<Store>((set) => ({
       );
 
       // place a new position of block and add active
-      state.currentBlock.path.forEach((item) => {
+      state.currentBlock?.path.forEach((item) => {
         if (!newBoard[item[1]][item[0]]) {
           newBoard[item[1]][item[0]] =
-            state.currentBlock.id + ACTIVE_CELL_SUFFIX;
+            state.currentBlock!.id + ACTIVE_CELL_SUFFIX;
         }
       });
 
@@ -102,6 +102,10 @@ export const useStore = create<Store>((set) => ({
     }),
   moveDown: () =>
     set((state) => {
+      if (!state.currentBlock) {
+        return state;
+      }
+
       return {
         ...state,
         currentBlock: {
@@ -114,6 +118,10 @@ export const useStore = create<Store>((set) => ({
     set((state) => ({ ...state, currentBlock: block })),
   prepareForNext: () =>
     set((state) => {
+      if (!state.currentBlock || !state.nextBlock) {
+        return state;
+      }
+
       return {
         ...state,
         // swap blocks
@@ -128,6 +136,10 @@ export const useStore = create<Store>((set) => ({
     }),
   moveLeft: () =>
     set((state) => {
+      if (!state.currentBlock) {
+        return state;
+      }
+
       return {
         ...state,
         currentBlock: {
@@ -138,6 +150,10 @@ export const useStore = create<Store>((set) => ({
     }),
   moveRight: () =>
     set((state) => {
+      if (!state.currentBlock) {
+        return state;
+      }
+
       return {
         ...state,
         currentBlock: {
