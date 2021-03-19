@@ -13,7 +13,7 @@ export const FAST_SPEED = 40;
 
 export const ACTIVE_CELL_SUFFIX = "_active";
 
-export const FONT = "/fonts/Raleway/static/Raleway-Bold.ttf";
+export const FONT = "/fonts/Raleway/static/Raleway-ExtraBold.ttf";
 
 // https://strategywiki.org/wiki/Tetris/Rotation_systems
 export const ALL_BLOCKS: Block[] = [
