@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { CellRounded } from "./CellRounded";
 import { BlockMetadata, getBlockWidth } from "../game/blocks";
@@ -9,19 +9,32 @@ type BlockPreviewProps = {
 };
 
 export function BlockPreview({ block }: BlockPreviewProps) {
-  // remove X/Y offsets of block, no needed here
-  const xAxisOffset = block.defaultPath.reduce(
-    (prev, curr) => (curr[0] < prev ? curr[0] : prev),
-    Infinity
-  );
-  const yAxisOffset = block.defaultPath.reduce(
-    (prev, curr) => (curr[1] < prev ? curr[1] : prev),
-    Infinity
+  // X offset to remove
+  const xAxisOffset = useMemo(
+    () =>
+      block.defaultPath.reduce(
+        (prev, curr) => (curr[0] < prev ? curr[0] : prev),
+        Infinity
+      ),
+    [block]
   );
 
-  // add X offset to center on the plane
-  const blockWidth = getBlockWidth(block.defaultPath);
-  const xCenterOffset = (4 - blockWidth) / 2;
+  // Y offset to remove
+  const yAxisOffset = useMemo(
+    () =>
+      block.defaultPath.reduce(
+        (prev, curr) => (curr[1] < prev ? curr[1] : prev),
+        Infinity
+      ),
+    [block]
+  );
+
+  // add X offset to center the block on the plane
+  const xCenterOffset = useMemo(() => {
+    const blockWidth = getBlockWidth(block.defaultPath);
+
+    return (4 - blockWidth) / 2;
+  }, [block]);
 
   return (
     <>
@@ -44,6 +57,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
 
         {/*
         {Array.from(Array(5).keys()).map((index) => (
+          // @ts-ignore
           <Line
             key={`horizontal-line-${index}`}
             points={[
@@ -56,6 +70,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
         ))}
 
         {Array.from(Array(5).keys()).map((index) => (
+          // @ts-ignore
           <Line
             key={`vertical-line-${index}`}
             points={[
