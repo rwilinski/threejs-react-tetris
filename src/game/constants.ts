@@ -20,7 +20,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "I",
     color: "#ee5253",
-    width: 4,
+    maxWidth: 4,
     paths: [
       [
         [0, 1],
@@ -51,7 +51,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "O",
     color: "#2ecc71",
-    width: 2,
+    maxWidth: 2,
     paths: [
       [
         [0, 0],
@@ -64,7 +64,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "Z",
     color: "#2e86de",
-    width: 3,
+    maxWidth: 3,
     paths: [
       [
         [0, 0],
@@ -95,7 +95,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "S",
     color: "#f1c40f",
-    width: 3,
+    maxWidth: 3,
     paths: [
       [
         [1, 0],
@@ -126,7 +126,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "J",
     color: "#9b59b6",
-    width: 3,
+    maxWidth: 3,
     paths: [
       [
         [0, 0],
@@ -157,7 +157,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "L",
     color: "#0abde3",
-    width: 3,
+    maxWidth: 3,
     paths: [
       [
         [0, 1],
@@ -188,7 +188,7 @@ export const ALL_BLOCKS: Block[] = [
   {
     id: "T",
     color: "#fd79a8",
-    width: 3,
+    maxWidth: 3,
     paths: [
       [
         [1, 0],

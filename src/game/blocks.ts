@@ -6,7 +6,7 @@ type BlockPathDimention = [x: number, y: number];
 export type Block = {
   id: string;
   color: string;
-  width: number;
+  maxWidth: number;
   paths: BlockPathDimention[][];
 };
 
@@ -30,15 +30,15 @@ export function getRandomBlock(): BlockMetadata {
 
 export function getRandomBlockAndCenter(boardWidth: typeof BOARD_WIDTH) {
   const block = getRandomBlock();
-  const xAxisMargin = Math.floor((boardWidth - block.width) / 2);
-  const yAxisMargin = block.path.reduce(
+  const xAxisOffset = Math.floor((boardWidth - block.maxWidth) / 2);
+  const yAxisOffset = block.path.reduce(
     (prev, curr) => (curr[1] < prev ? curr[1] : prev),
     Infinity
   );
 
   block.path = block.path.map((row) => [
-    row[0] + xAxisMargin,
-    row[1] - yAxisMargin,
+    row[0] + xAxisOffset,
+    row[1] - yAxisOffset,
   ]);
 
   return block;
@@ -61,11 +61,11 @@ export function rotateBlock(block: BlockMetadata) {
   };
 }
 
-export function getBlockWidth(path: BlockPathDimention[]) {
-  const xAxisOffset = path.reduce(
-    (prev, curr) => (curr[0] < prev ? curr[0] : prev),
-    Infinity
-  );
+export function getBlockWidth(path: BlockPathDimention[], absolute = false) {
+  // asbolute - count from 0; include left offset
+  const xAxisOffset = absolute
+    ? 0
+    : path.reduce((prev, curr) => (curr[0] < prev ? curr[0] : prev), Infinity);
 
   const maxX = path.reduce(
     (prev, curr) => (curr[0] > prev ? curr[0] : prev),
