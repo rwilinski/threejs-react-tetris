@@ -9,12 +9,12 @@ import {
   BOX_SIZE,
 } from "../game/constants";
 
-export function Grid() {
-  const lineProps = {
-    color: "#787878",
-    lineWidth: 0.5,
-  };
+const lineProps = {
+  color: "#787878",
+  lineWidth: 0.5,
+};
 
+export function Grid() {
   return (
     <>
       {Array.from(Array(BOARD_HEIGHT + 1).keys()).map((index) => (
