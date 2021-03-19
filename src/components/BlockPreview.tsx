@@ -16,7 +16,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
         (prev, curr) => (curr[0] < prev ? curr[0] : prev),
         Infinity
       ),
-    [block]
+    [block.defaultPath]
   );
 
   // Y offset to remove
@@ -26,7 +26,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
         (prev, curr) => (curr[1] < prev ? curr[1] : prev),
         Infinity
       ),
-    [block]
+    [block.defaultPath]
   );
 
   // add X offset to center the block on the plane
@@ -34,7 +34,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
     const blockWidth = getBlockWidth(block.defaultPath);
 
     return (4 - blockWidth) / 2;
-  }, [block]);
+  }, [block.defaultPath]);
 
   return (
     <>
