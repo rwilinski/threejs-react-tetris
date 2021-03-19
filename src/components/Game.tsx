@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useEventListener, useInterval } from "ahooks";
 
 import { useStore } from "../game/store";
