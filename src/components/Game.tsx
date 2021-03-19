@@ -215,7 +215,7 @@ export function Game() {
 
           return (
             <CellRounded
-              key={`${rowIndex}-${cellIndex}`}
+              key={`cell-${rowIndex}-${cellIndex}`}
               position={[cellIndex * BOX_SIZE, rowIndex * BOX_SIZE, 0]}
               blockId={cell}
             />

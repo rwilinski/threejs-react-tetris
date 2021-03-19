@@ -20,7 +20,7 @@ export function Grid() {
       {Array.from(Array(BOARD_HEIGHT + 1).keys()).map((index) => (
         // @ts-ignore
         <Line
-          key={index}
+          key={`grid-horizontal-line-${index}`}
           points={[
             [0, index * BOX_SIZE, 0],
             [GRID_WIDTH, index * BOX_SIZE, 0],
@@ -32,7 +32,7 @@ export function Grid() {
       {Array.from(Array(BOARD_WIDTH + 1).keys()).map((index) => (
         // @ts-ignore
         <Line
-          key={index}
+          key={`grid-vertical-line-${index}`}
           points={[
             [index * BOX_SIZE, 0, 0],
             [index * BOX_SIZE, GRID_HEIGHT, 0],
