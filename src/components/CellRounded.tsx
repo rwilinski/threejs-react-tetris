@@ -20,12 +20,16 @@ export function CellRounded({
     // @ts-ignore
     <RoundedBox
       args={[BOX_SIZE, BOX_SIZE, BOX_SIZE]}
-      radius={0.4}
+      radius={0.8}
       smoothness={1}
       position={position.map((p) => p + BOX_SIZE / 2)}
       {...props}
     >
-      <meshLambertMaterial color={color || getColorById(blockId!)} />
+      <meshStandardMaterial
+        color={color || getColorById(blockId!)}
+        roughness={0.75}
+        metalness={0.5}
+      />
     </RoundedBox>
   );
 }

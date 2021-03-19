@@ -22,12 +22,10 @@ function App() {
     <Canvas
       shadowMap
       camera={{ fov: 75, position: cameraPosition }}
-      style={{ backgroundColor: "#eeeeee" }}
+      onCreated={({ gl }) => gl.setClearColor("#eeeeee")}
     >
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-
-      <hemisphereLight args={[0xffffff, 0x000000]} position={[0, 20, 20]} />
+      <pointLight position={cameraPosition} intensity={1} />
 
       {/* @ts-ignore */}
       <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
