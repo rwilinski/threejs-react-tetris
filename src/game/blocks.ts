@@ -61,6 +61,20 @@ export function rotateBlock(block: BlockMetadata) {
   };
 }
 
+export function getBlockWidth(path: BlockPathDimention[]) {
+  const xAxisOffset = path.reduce(
+    (prev, curr) => (curr[0] < prev ? curr[0] : prev),
+    Infinity
+  );
+
+  const maxX = path.reduce(
+    (prev, curr) => (curr[0] > prev ? curr[0] : prev),
+    0
+  );
+
+  return maxX - xAxisOffset + 1;
+}
+
 export function getColorById(id: Block["id"]) {
   return ALL_BLOCKS.find((item) => item.id === id || id.startsWith(item.id))
     ?.color;
