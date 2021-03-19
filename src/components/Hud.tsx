@@ -1,4 +1,5 @@
 import React from "react";
+import shallow from "zustand/shallow";
 
 import { useStore } from "../game/store";
 import { GRID_WIDTH, GRID_HEIGHT } from "../game/constants";
@@ -6,7 +7,10 @@ import { RenderText } from "./RenderText";
 import { BlockPreview } from "./BlockPreview";
 
 export function Hud() {
-  const state = useStore();
+  const { score, nextBlock } = useStore(
+    (state) => ({ score: state.score, nextBlock: state.nextBlock }),
+    shallow
+  );
 
   return (
     <>
@@ -30,10 +34,10 @@ export function Hud() {
         position={[GRID_WIDTH + 50, GRID_HEIGHT - 30, 0]}
         anchorY="top"
       >
-        {state.score}
+        {score}
       </RenderText>
 
-      {state.nextBlock && <BlockPreview block={state.nextBlock} />}
+      {nextBlock && <BlockPreview block={nextBlock} />}
     </>
   );
 }
