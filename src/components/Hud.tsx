@@ -1,10 +1,10 @@
 import React from "react";
 import shallow from "zustand/shallow";
 
+import { BlockPreview } from "./BlockPreview";
 import { useStore } from "../game/store";
 import { GRID_WIDTH, GRID_HEIGHT } from "../game/constants";
 import { RenderText } from "./RenderText";
-import { BlockPreview } from "./BlockPreview";
 
 export function Hud() {
   const { score, nextBlock } = useStore(

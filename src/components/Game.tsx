@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEventListener, useInterval } from "ahooks";
 
+import { CellRounded } from "./CellRounded";
 import { useStore } from "../game/store";
 import { isCellActive, rotateBlock } from "../game/blocks";
 import {
@@ -10,7 +11,6 @@ import {
   FAST_SPEED,
   NORMAL_SPEED,
 } from "../game/constants";
-import { CellRounded } from "./CellRounded";
 
 export function Game() {
   const state = useStore();
@@ -218,6 +218,7 @@ export function Game() {
               key={`cell-${rowIndex}-${cellIndex}-${cell}`}
               position={[
                 cellIndex * BOX_SIZE,
+                // three.js space starts from the bottom, from 0. Need to reverse
                 (BOARD_HEIGHT - 1) * BOX_SIZE - rowIndex * BOX_SIZE,
                 0,
               ]}
