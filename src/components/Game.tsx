@@ -207,7 +207,7 @@ export function Game() {
 
   return (
     <>
-      {[...state.board].reverse().map((row, rowIndex) => {
+      {state.board.map((row, rowIndex) => {
         return row.map((cell, cellIndex) => {
           if (!cell) {
             return null;
@@ -215,8 +215,12 @@ export function Game() {
 
           return (
             <CellRounded
-              key={`cell-${rowIndex}-${cellIndex}`}
-              position={[cellIndex * BOX_SIZE, rowIndex * BOX_SIZE, 0]}
+              key={`cell-${rowIndex}-${cellIndex}-${cell}`}
+              position={[
+                cellIndex * BOX_SIZE,
+                (BOARD_HEIGHT - 1) * BOX_SIZE - rowIndex * BOX_SIZE,
+                0,
+              ]}
               blockId={cell}
             />
           );

@@ -6,13 +6,11 @@ import { Block, getColorById } from "../game/blocks";
 
 type CellRoundedType = {
   position: [number, number, number];
-  color?: string;
-  blockId?: Block["id"];
+  blockId: Block["id"];
 };
 
-export function CellRounded({
+function CellRoundedNoMemo({
   position = [0, 0, 0],
-  color,
   blockId,
   ...props
 }: CellRoundedType) {
@@ -26,10 +24,19 @@ export function CellRounded({
       {...props}
     >
       <meshStandardMaterial
-        color={color || getColorById(blockId!)}
+        color={getColorById(blockId!)}
         roughness={0.75}
         metalness={0.5}
       />
     </RoundedBox>
   );
 }
+
+export const CellRounded = React.memo(CellRoundedNoMemo, (prev, next) => {
+  return (
+    prev.position[0] === next.position[0] &&
+    prev.position[1] === next.position[1] &&
+    prev.position[2] === next.position[2] &&
+    prev.blockId === next.blockId
+  );
+});

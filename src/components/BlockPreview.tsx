@@ -50,7 +50,7 @@ export function BlockPreview({ block }: BlockPreviewProps) {
                   30 - row[1] * BOX_SIZE,
                   0,
                 ]}
-                color={block.color}
+                blockId={block.id}
               />
             );
           })}
