@@ -7,6 +7,7 @@ import { preloadFont } from "troika-three-text";
 import { Grid } from "./components/Grid";
 import { Hud } from "./components/Hud";
 import { Game } from "./components/Game";
+import { CameraShakeProvider } from "./contexts/CameraShakeContext";
 import { FONT, GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
@@ -24,21 +25,23 @@ function App() {
       camera={{ fov: 75, position: cameraPosition }}
       onCreated={({ gl }) => gl.setClearColor("#eeeeee")}
     >
-      <ambientLight />
-      <pointLight position={cameraPosition} intensity={1} />
+      <CameraShakeProvider>
+        <ambientLight />
+        <pointLight position={cameraPosition} intensity={1} />
 
-      {/* @ts-ignore */}
-      <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
+        {/* @ts-ignore */}
+        <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
 
-      {isFontLoaded && (
-        <>
-          <Grid />
+        {isFontLoaded && (
+          <>
+            <Grid />
 
-          <Hud />
+            <Hud />
 
-          <Game />
-        </>
-      )}
+            <Game />
+          </>
+        )}
+      </CameraShakeProvider>
     </Canvas>
   );
 }

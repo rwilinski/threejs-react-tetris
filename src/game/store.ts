@@ -12,7 +12,7 @@ type Store = {
   gamePaused: boolean;
   // Actions:
   restart: () => void;
-  updateBoard: () => void;
+  updateBoard: () => number[];
   moveDown: () => void;
   setCurrentBlock: (block: BlockMetadata) => void;
   prepareForNext: () => void;
@@ -51,7 +51,9 @@ export const useStore = create<Store>((set) => ({
         nextBlock: getRandomBlockAndCenter(BOARD_WIDTH),
       };
     }),
-  updateBoard: () =>
+  updateBoard: () => {
+    const clearedRows: number[] = [];
+
     set((state) => {
       // remove old active cells
       const newBoard = state.board.map((row) =>
@@ -66,21 +68,19 @@ export const useStore = create<Store>((set) => ({
         }
       });
 
-      const fullRows: number[] = [];
-
       state.board.forEach((row, rowIndex) => {
         const isFull =
           row.filter((cell) => cell && !isCellActive(cell)).length ===
           row.length;
 
         if (isFull) {
-          fullRows.push(rowIndex);
+          clearedRows.push(rowIndex);
         }
       });
 
-      if (fullRows.length) {
+      if (clearedRows.length) {
         // remove full rows from the bottom
-        fullRows.forEach((row) => {
+        clearedRows.forEach((row) => {
           for (let i = row; i > 0; i--) {
             for (let j = 0; j < BOARD_WIDTH; j++) {
               if (
@@ -97,9 +97,12 @@ export const useStore = create<Store>((set) => ({
       return {
         ...state,
         board: newBoard,
-        score: state.score + fullRows.length * fullRows.length,
+        score: state.score + clearedRows.length * clearedRows.length,
       };
-    }),
+    });
+
+    return clearedRows;
+  },
   moveDown: () =>
     set((state) => {
       if (!state.currentBlock) {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEventListener, useInterval } from "ahooks";
 
 import { CellRounded } from "./CellRounded";
+import { useCameraShake } from "../contexts/CameraShakeContext";
 import { useStore } from "../game/store";
 import { isCellActive, rotateBlock } from "../game/blocks";
 import {
@@ -14,6 +15,7 @@ import {
 
 export function Game() {
   const state = useStore();
+  const cameraShake = useCameraShake();
   const [gameInterval, setGameInterval] = useState<number | null>(null);
 
   const startNewGame = () => {
@@ -199,7 +201,11 @@ export function Game() {
         state.moveDown();
       }
 
-      state.updateBoard();
+      const clearedRows = state.updateBoard();
+
+      if (clearedRows.length) {
+        cameraShake.shake();
+      }
     },
     gameInterval,
     { immediate: false }
