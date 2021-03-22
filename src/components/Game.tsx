@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useEventListener, useInterval } from "ahooks";
 
 import { CellRounded } from "./CellRounded";
 import { useCameraShake } from "../contexts/CameraShakeContext";
+import { useRenderBillboard } from "../contexts/RenderBillboard";
 import { useStore } from "../game/store";
 import { isCellActive, rotateBlock } from "../game/blocks";
 import {
@@ -16,6 +17,7 @@ import {
 export function Game() {
   const state = useStore();
   const cameraShake = useCameraShake();
+  const billboard = useRenderBillboard();
   const [gameInterval, setGameInterval] = useState<number | null>(null);
 
   const startNewGame = () => {
@@ -108,6 +110,8 @@ export function Game() {
   };
 
   const togglePause = () => {
+    billboard.hide();
+
     if (state.gameOver) {
       startNewGame();
 
@@ -115,6 +119,11 @@ export function Game() {
     }
 
     setGameInterval(state.gamePaused ? NORMAL_SPEED : null);
+
+    // negation, because it's before state change
+    if (!state.gamePaused) {
+      billboard.show("Game paused");
+    }
 
     state.toggleGamePause();
   };
@@ -187,11 +196,15 @@ export function Game() {
       if (canMoveDownActiveBlock) {
         // check can add a new block to the top of the board
         if (!canAddNewBlock()) {
-          console.log("Finish!");
-
           state.setGameOver();
 
           setGameInterval(null);
+
+          billboard.show(`GAME OVER
+
+Your score: ${state.score}
+
+Press space to restart.`);
 
           return;
         }
@@ -210,6 +223,11 @@ export function Game() {
     gameInterval,
     { immediate: false }
   );
+
+  useEffect(() => {
+    billboard.show("Press space to start");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

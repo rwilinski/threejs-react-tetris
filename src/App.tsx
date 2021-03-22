@@ -8,6 +8,7 @@ import { Grid } from "./components/Grid";
 import { Hud } from "./components/Hud";
 import { Game } from "./components/Game";
 import { CameraShakeProvider } from "./contexts/CameraShakeContext";
+import { RenderBillboardProvider } from "./contexts/RenderBillboard";
 import { FONT, GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
@@ -26,21 +27,23 @@ function App() {
       onCreated={({ gl }) => gl.setClearColor("#eeeeee")}
     >
       <CameraShakeProvider>
-        <ambientLight />
-        <pointLight position={cameraPosition} intensity={1} />
+        <RenderBillboardProvider>
+          <ambientLight />
+          <pointLight position={cameraPosition} intensity={1} />
 
-        {/* @ts-ignore */}
-        <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
+          {/* @ts-ignore */}
+          <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
 
-        {isFontLoaded && (
-          <>
-            <Grid />
+          {isFontLoaded && (
+            <>
+              <Grid />
 
-            <Hud />
+              <Hud />
 
-            <Game />
-          </>
-        )}
+              <Game />
+            </>
+          )}
+        </RenderBillboardProvider>
       </CameraShakeProvider>
     </Canvas>
   );
