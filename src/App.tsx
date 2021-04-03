@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Canvas } from "react-three-fiber";
-import { OrbitControls } from "@react-three/drei";
 // @ts-ignore
 import { preloadFont } from "troika-three-text";
 
@@ -30,9 +29,6 @@ function App() {
         <RenderBillboardProvider>
           <ambientLight />
           <pointLight position={cameraPosition} intensity={1} />
-
-          {/* @ts-ignore */}
-          <OrbitControls target={[GRID_WIDTH / 2, GRID_HEIGHT / 2, 0]} />
 
           {isFontLoaded && (
             <>

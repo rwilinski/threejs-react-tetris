@@ -26,16 +26,14 @@ export const CameraShakeProvider = ({ children }: CameraShakeProviderProps) => {
   return (
     <CameraShakeContext.Provider value={value}>
       {children}
-      {isShake && (
-        <CameraShake
-          maxYaw={0.02}
-          maxPitch={0.02}
-          maxRoll={0.02}
-          yawFrequency={10}
-          pitchFrequency={10}
-          rollFrequency={10}
-        />
-      )}
+      <CameraShake
+        maxYaw={isShake ? 0.02 : 0}
+        maxPitch={isShake ? 0.02 : 0}
+        maxRoll={isShake ? 0.02 : 0}
+        yawFrequency={isShake ? 10 : 0}
+        pitchFrequency={isShake ? 10 : 0}
+        rollFrequency={isShake ? 10 : 0}
+      />
     </CameraShakeContext.Provider>
   );
 };
