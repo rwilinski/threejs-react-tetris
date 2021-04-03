@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { Billboard, Text } from "@react-three/drei";
 import { GRID_WIDTH, FONT } from "../game/constants";
 

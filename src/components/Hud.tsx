@@ -1,4 +1,3 @@
-import React from "react";
 import shallow from "zustand/shallow";
 
 import { BlockPreview } from "./BlockPreview";

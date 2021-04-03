@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useEventListener, useInterval } from "ahooks";
 
 import { CellRounded } from "./CellRounded";

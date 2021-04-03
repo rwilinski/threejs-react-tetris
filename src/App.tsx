@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "react-three-fiber";
 // @ts-ignore
 import { preloadFont } from "troika-three-text";

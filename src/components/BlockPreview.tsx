@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { CellRounded } from "./CellRounded";
 import { BlockMetadata, getBlockWidth } from "../game/blocks";

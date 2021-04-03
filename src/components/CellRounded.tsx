@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { RoundedBox } from "@react-three/drei";
 
 import { BOX_SIZE } from "../game/constants";
@@ -32,7 +32,7 @@ function CellRoundedNoMemo({
   );
 }
 
-export const CellRounded = React.memo(CellRoundedNoMemo, (prev, next) => {
+export const CellRounded = memo(CellRoundedNoMemo, (prev, next) => {
   return (
     prev.position[0] === next.position[0] &&
     prev.position[1] === next.position[1] &&

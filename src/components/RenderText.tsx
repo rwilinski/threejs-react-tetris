@@ -1,4 +1,3 @@
-import React from "react";
 import { Text } from "@react-three/drei";
 
 import { FONT } from "../game/constants";
