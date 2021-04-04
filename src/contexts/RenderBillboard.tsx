@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { Billboard, Text } from "@react-three/drei";
-import { GRID_WIDTH, FONT } from "../game/constants";
+import { GRID_WIDTH, FONT, COLORS } from "../game/constants";
 
 type RenderBillboardContextType = {
   show: (text: string) => void;
@@ -33,13 +33,13 @@ export const RenderBillboardProvider = ({
         <Billboard
           position={[GRID_WIDTH / 2, 100, 50]}
           args={[100, 50]}
-          material-color="#4a4e4d"
+          material-color={COLORS.BILLBOARD.BACKGROUND}
           follow={true}
         >
           {/* @ts-ignore */}
           <Text
             position={[0, 0, 1]}
-            color="#fff"
+            color={COLORS.BILLBOARD.TEXT}
             fontSize={7}
             maxWidth={90}
             font={FONT}

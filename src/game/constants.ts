@@ -15,6 +15,16 @@ export const ACTIVE_CELL_SUFFIX = "_active";
 
 export const FONT = "/fonts/Raleway/static/Raleway-ExtraBold.ttf";
 
+export const COLORS = {
+  BACKGROUND: "#eee",
+  GRID: "#787878",
+  TEXT: "#191919",
+  BILLBOARD: {
+    BACKGROUND: "#4a4e4d",
+    TEXT: "#fff",
+  },
+};
+
 // https://strategywiki.org/wiki/Tetris/Rotation_systems
 export const ALL_BLOCKS: Block[] = [
   {

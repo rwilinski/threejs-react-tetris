@@ -41,47 +41,17 @@ export function BlockPreview({ block }: BlockPreviewProps) {
       <group position={[-60, 125, 0]}>
         {block.defaultPath
           .map((row) => [row[0] - xAxisOffset, row[1] - yAxisOffset])
-          .map((row) => {
-            return (
-              <CellRounded
-                key={`block-preview-cell-${row[0]}-${row[1]}`}
-                position={[
-                  xCenterOffset * BOX_SIZE + row[0] * BOX_SIZE,
-                  30 - row[1] * BOX_SIZE,
-                  0,
-                ]}
-                blockId={block.id}
-              />
-            );
-          })}
-
-        {/*
-        {Array.from(Array(5).keys()).map((index) => (
-          // @ts-ignore
-          <Line
-            key={`horizontal-line-${index}`}
-            points={[
-              [0, index * BOX_SIZE, 0],
-              [4 * BOX_SIZE, index * BOX_SIZE, 0],
-            ]}
-            color="#787878"
-            lineWidth={0.5}
-          />
-        ))}
-
-        {Array.from(Array(5).keys()).map((index) => (
-          // @ts-ignore
-          <Line
-            key={`vertical-line-${index}`}
-            points={[
-              [index * BOX_SIZE, 0, 0],
-              [index * BOX_SIZE, 4 * BOX_SIZE, 0],
-            ]}
-            color="#787878"
-            lineWidth={0.5}
-          />
-        ))}
-        */}
+          .map((row) => (
+            <CellRounded
+              key={`block-preview-cell-${row[0]}-${row[1]}`}
+              position={[
+                xCenterOffset * BOX_SIZE + row[0] * BOX_SIZE,
+                30 - row[1] * BOX_SIZE,
+                0,
+              ]}
+              blockId={block.id}
+            />
+          ))}
       </group>
     </>
   );

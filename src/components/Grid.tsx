@@ -6,10 +6,11 @@ import {
   GRID_WIDTH,
   GRID_HEIGHT,
   BOX_SIZE,
+  COLORS,
 } from "../game/constants";
 
 const lineProps = {
-  color: "#787878",
+  color: COLORS.GRID,
   lineWidth: 0.5,
 };
 

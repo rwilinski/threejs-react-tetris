@@ -81,5 +81,5 @@ export function getColorById(id: Block["id"]) {
 }
 
 export function isCellActive(cell: string) {
-  return cell.endsWith(ACTIVE_CELL_SUFFIX);
+  return String(cell).endsWith(ACTIVE_CELL_SUFFIX);
 }

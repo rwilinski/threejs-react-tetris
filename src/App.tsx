@@ -8,7 +8,7 @@ import { Hud } from "./components/Hud";
 import { Game } from "./components/Game";
 import { CameraShakeProvider } from "./contexts/CameraShakeContext";
 import { RenderBillboardProvider } from "./contexts/RenderBillboard";
-import { FONT, GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
+import { COLORS, FONT, GRID_HEIGHT, GRID_WIDTH } from "./game/constants";
 
 function App() {
   const cameraPosition = [GRID_WIDTH / 2, GRID_HEIGHT / 2, 150]; // middle of the grid
@@ -23,7 +23,7 @@ function App() {
     <Canvas
       shadowMap
       camera={{ fov: 75, position: cameraPosition }}
-      onCreated={({ gl }) => gl.setClearColor("#eeeeee")}
+      onCreated={({ gl }) => gl.setClearColor(COLORS.BACKGROUND)}
     >
       <CameraShakeProvider>
         <RenderBillboardProvider>

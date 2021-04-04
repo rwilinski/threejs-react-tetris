@@ -129,7 +129,7 @@ export const useStore = create<Store>((set) => ({
         ...state,
         // swap blocks
         currentBlock: { ...state.nextBlock },
-        // generateNextBlock
+        // generate next block
         nextBlock: getRandomBlockAndCenter(BOARD_WIDTH),
         // remove active block from board
         board: state.board.map((row) =>
