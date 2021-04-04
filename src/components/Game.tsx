@@ -28,17 +28,9 @@ export function Game() {
   };
 
   const canAddNewBlock = () => {
-    let canBePlaced = true;
-
-    state.nextBlock!.path.forEach((item) => {
-      const cell = state.board[item[1]][item[0]];
-
-      if (cell) {
-        canBePlaced = false;
-      }
-    });
-
-    return canBePlaced;
+    return state.nextBlock?.path.every(
+      (item) => !state.board[item[1]][item[0]]
+    );
   };
 
   const rotate = () => {
@@ -48,42 +40,37 @@ export function Game() {
 
     const next = rotateBlock(state.currentBlock!);
 
-    let canRotate = true;
-
     next.path = next.path.map((item) => [
       item[0] + offsetLeft,
       item[1] + offsetTop,
     ]);
 
-    for (const item of next.path) {
+    const canRotate = next.path.every((item) => {
       if (
         item[0] < 0 ||
-        item[1] < 0 ||
         item[0] >= BOARD_WIDTH ||
-        item[1] >= BOARD_HEIGHT ||
-        (state.board[item[1]][item[0]] &&
-          !isCellActive(state.board[item[1]][item[0]]))
+        item[1] < 0 ||
+        item[1] >= BOARD_HEIGHT
       ) {
-        canRotate = false;
+        return false;
       }
-    }
+
+      const cell = state.board[item[1]][item[0]];
+
+      return cell === "" || isCellActive(cell);
+    });
 
     if (canRotate) {
       state.setCurrentBlock(next);
+      state.updateBoard();
     }
-
-    state.updateBoard();
   };
 
   const moveLeft = () => {
-    let canMove = true;
-
-    state.currentBlock!.path.forEach((item) => {
+    const canMove = state.currentBlock?.path.every((item) => {
       const cell = state.board[item[1]][item[0] - 1];
 
-      if (!(item[0] - 1 >= 0) || (cell && !isCellActive(cell))) {
-        canMove = false;
-      }
+      return cell === "" || isCellActive(cell);
     });
 
     if (canMove) {
@@ -93,14 +80,10 @@ export function Game() {
   };
 
   const moveRight = () => {
-    let canMove = true;
-
-    state.currentBlock!.path.forEach((item) => {
+    const canMove = state.currentBlock?.path.every((item) => {
       const cell = state.board[item[1]][item[0] + 1];
 
-      if (!(item[0] + 1 < BOARD_WIDTH) || (cell && !isCellActive(cell))) {
-        canMove = false;
-      }
+      return cell === "" || isCellActive(cell);
     });
 
     if (canMove) {
@@ -128,7 +111,7 @@ export function Game() {
     state.toggleGamePause();
   };
 
-  useEventListener("keydown", ({ key }: { key: string }) => {
+  useEventListener("keydown", ({ key }) => {
     switch (key) {
       case "ArrowUp":
         if (gameInterval) {
@@ -159,6 +142,7 @@ export function Game() {
         break;
 
       case " ":
+      case "Escape":
         togglePause();
         break;
 
@@ -167,7 +151,7 @@ export function Game() {
     }
   });
 
-  useEventListener("keyup", ({ key }: { key: string }) => {
+  useEventListener("keyup", ({ key }) => {
     if (key === "ArrowDown" && gameInterval) {
       setGameInterval(NORMAL_SPEED);
     }
