@@ -33,6 +33,18 @@ export function Game() {
     );
   };
 
+  const canMoveDown = () => {
+    return state.currentBlock?.path.every((item) => {
+      if (item[1] + 1 >= BOARD_HEIGHT) {
+        return false;
+      }
+
+      const cell = state.board[item[1] + 1][item[0]];
+
+      return cell === "" || isCellActive(cell);
+    });
+  };
+
   const rotate = () => {
     const { path, defaultPath } = state.currentBlock!;
     const offsetLeft = path[0][0] - defaultPath[0][0];
@@ -159,25 +171,7 @@ export function Game() {
 
   useInterval(
     () => {
-      let canMoveDownActiveBlock = false;
-
-      state.board.forEach((row, rowIndex) => {
-        row.forEach((cell, cellIndex) => {
-          state.currentBlock!.path.forEach((item) => {
-            if (
-              (cell &&
-                !isCellActive(cell) &&
-                item[0] === cellIndex &&
-                item[1] + 1 === rowIndex) ||
-              item[1] + 1 === state.board.length
-            ) {
-              canMoveDownActiveBlock = true;
-            }
-          });
-        });
-      });
-
-      if (canMoveDownActiveBlock) {
+      if (!canMoveDown()) {
         // check can add a new block to the top of the board
         if (!canAddNewBlock()) {
           state.setGameOver();
