@@ -182,7 +182,7 @@ export function Game() {
 
 Your score: ${state.score}
 
-Press space to restart.`);
+Press space bar to restart.`);
 
           return;
         }
@@ -203,7 +203,7 @@ Press space to restart.`);
   );
 
   useEffect(() => {
-    billboard.show("Press space to start");
+    billboard.show("Press space bar to start");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
