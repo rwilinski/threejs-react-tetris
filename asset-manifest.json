@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.5d4a10c4.chunk.css",
-    "main.js": "/static/js/main.fdced503.chunk.js",
-    "main.js.map": "/static/js/main.fdced503.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d3fea20b.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d3fea20b.js.map",
-    "static/js/2.1988a74e.chunk.js": "/static/js/2.1988a74e.chunk.js",
-    "static/js/2.1988a74e.chunk.js.map": "/static/js/2.1988a74e.chunk.js.map",
-    "static/js/3.2c9b44ff.chunk.js": "/static/js/3.2c9b44ff.chunk.js",
-    "static/js/3.2c9b44ff.chunk.js.map": "/static/js/3.2c9b44ff.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.5d4a10c4.chunk.css.map": "/static/css/main.5d4a10c4.chunk.css.map",
-    "static/js/2.1988a74e.chunk.js.LICENSE.txt": "/static/js/2.1988a74e.chunk.js.LICENSE.txt"
+    "main.css": "https://rwilinski.github.io/threejs-react-tetris/static/css/main.5d4a10c4.chunk.css",
+    "main.js": "https://rwilinski.github.io/threejs-react-tetris/static/js/main.fdced503.chunk.js",
+    "main.js.map": "https://rwilinski.github.io/threejs-react-tetris/static/js/main.fdced503.chunk.js.map",
+    "runtime-main.js": "https://rwilinski.github.io/threejs-react-tetris/static/js/runtime-main.698dd778.js",
+    "runtime-main.js.map": "https://rwilinski.github.io/threejs-react-tetris/static/js/runtime-main.698dd778.js.map",
+    "static/js/2.1988a74e.chunk.js": "https://rwilinski.github.io/threejs-react-tetris/static/js/2.1988a74e.chunk.js",
+    "static/js/2.1988a74e.chunk.js.map": "https://rwilinski.github.io/threejs-react-tetris/static/js/2.1988a74e.chunk.js.map",
+    "static/js/3.2c9b44ff.chunk.js": "https://rwilinski.github.io/threejs-react-tetris/static/js/3.2c9b44ff.chunk.js",
+    "static/js/3.2c9b44ff.chunk.js.map": "https://rwilinski.github.io/threejs-react-tetris/static/js/3.2c9b44ff.chunk.js.map",
+    "index.html": "https://rwilinski.github.io/threejs-react-tetris/index.html",
+    "static/css/main.5d4a10c4.chunk.css.map": "https://rwilinski.github.io/threejs-react-tetris/static/css/main.5d4a10c4.chunk.css.map",
+    "static/js/2.1988a74e.chunk.js.LICENSE.txt": "https://rwilinski.github.io/threejs-react-tetris/static/js/2.1988a74e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d3fea20b.js",
+    "static/js/runtime-main.698dd778.js",
     "static/js/2.1988a74e.chunk.js",
     "static/css/main.5d4a10c4.chunk.css",
     "static/js/main.fdced503.chunk.js"
