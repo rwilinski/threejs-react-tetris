@@ -13,7 +13,7 @@ export const FAST_SPEED = 40;
 
 export const ACTIVE_CELL_SUFFIX = "_active";
 
-export const FONT = "/fonts/Raleway/static/Raleway-ExtraBold.ttf";
+export const FONT = `${process.env.PUBLIC_URL}/fonts/Raleway/static/Raleway-ExtraBold.ttf`;
 
 export const COLORS = {
   BACKGROUND: "#eee",
