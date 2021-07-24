@@ -52,7 +52,7 @@ export const useStore = create<Store>((set) => ({
       };
     }),
   updateBoard: () => {
-    const clearedRows: number[] = [];
+    let clearedRows: number[] = [];
 
     set((state) => {
       // remove old active cells
@@ -74,14 +74,9 @@ export const useStore = create<Store>((set) => ({
           row.length;
 
         if (isFull) {
-          clearedRows.push(rowIndex);
-        }
-      });
+          clearedRows = [...clearedRows, rowIndex];
 
-      if (clearedRows.length) {
-        // remove full rows from the bottom
-        clearedRows.forEach((row) => {
-          for (let i = row; i > 0; i--) {
+          for (let i = rowIndex; i > 0; i--) {
             for (let j = 0; j < BOARD_WIDTH; j++) {
               if (
                 !isCellActive(newBoard[i][j]) &&
@@ -91,8 +86,8 @@ export const useStore = create<Store>((set) => ({
               }
             }
           }
-        });
-      }
+        }
+      });
 
       return {
         ...state,
