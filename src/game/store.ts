@@ -1,7 +1,18 @@
 import create from "zustand";
 
-import { ACTIVE_CELL_SUFFIX, BOARD_HEIGHT, BOARD_WIDTH } from "./constants";
-import { BlockMetadata, getRandomBlockAndCenter, isCellActive } from "./blocks";
+import {
+  ACTIVE_CELL_SUFFIX,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  GHOST_CELL_SUFFIX,
+} from "./constants";
+import {
+  BlockMetadata,
+  BlockPathDimention,
+  getRandomBlockAndCenter,
+  isCellActive,
+  isCellActiveOrGhost,
+} from "./blocks";
 
 type Store = {
   board: string[][];
@@ -57,7 +68,7 @@ export const useStore = create<Store>((set) => ({
     set((state) => {
       // remove old active cells
       const newBoard = state.board.map((row) =>
-        row.map((cell) => (isCellActive(cell) ? "" : cell))
+        row.map((cell) => (isCellActiveOrGhost(cell) ? "" : cell))
       );
 
       // place a new position of block and add active
@@ -70,7 +81,7 @@ export const useStore = create<Store>((set) => ({
 
       state.board.forEach((row, rowIndex) => {
         const isFull =
-          row.filter((cell) => cell && !isCellActive(cell)).length ===
+          row.filter((cell) => cell && !isCellActiveOrGhost(cell)).length ===
           row.length;
 
         if (isFull) {
@@ -79,13 +90,46 @@ export const useStore = create<Store>((set) => ({
           for (let i = rowIndex; i > 0; i--) {
             for (let j = 0; j < BOARD_WIDTH; j++) {
               if (
-                !isCellActive(newBoard[i][j]) &&
-                !isCellActive(newBoard[i - 1][j])
+                !isCellActiveOrGhost(newBoard[i][j]) &&
+                !isCellActiveOrGhost(newBoard[i - 1][j])
               ) {
                 newBoard[i][j] = newBoard[i - 1][j];
               }
             }
           }
+        }
+      });
+
+      let ghostBlock: BlockPathDimention[] = [];
+
+      for (let rowIndex = 1; rowIndex < BOARD_HEIGHT; rowIndex++) {
+        const ghostBlockPosition: BlockPathDimention[] =
+          state.currentBlock?.path.map((path) => [
+            path[0],
+            path[1] + rowIndex,
+          ]) || [];
+
+        const canPlaceGhostBlock = ghostBlockPosition
+          .map((cell) => {
+            if (newBoard[cell[1]] && newBoard[cell[1]][cell[0]] !== null) {
+              return newBoard[cell[1]][cell[0]];
+            }
+
+            return null;
+          })
+          .every((cell) => cell === "" || isCellActive(cell!));
+
+        if (!canPlaceGhostBlock) {
+          break;
+        }
+
+        ghostBlock = ghostBlockPosition;
+      }
+
+      ghostBlock.forEach((item) => {
+        if (!newBoard[item[1]][item[0]]) {
+          newBoard[item[1]][item[0]] =
+            state.currentBlock!.id + GHOST_CELL_SUFFIX;
         }
       });
 

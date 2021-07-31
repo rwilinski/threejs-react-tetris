@@ -1,7 +1,12 @@
-import { ALL_BLOCKS, ACTIVE_CELL_SUFFIX, BOARD_WIDTH } from "./constants";
+import {
+  ALL_BLOCKS,
+  ACTIVE_CELL_SUFFIX,
+  BOARD_WIDTH,
+  GHOST_CELL_SUFFIX,
+} from "./constants";
 import { getRandomElement } from "./utils";
 
-type BlockPathDimention = [x: number, y: number];
+export type BlockPathDimention = [x: number, y: number];
 
 export type Block = {
   id: string;
@@ -80,6 +85,14 @@ export function getColorById(id: Block["id"]) {
     ?.color;
 }
 
-export function isCellActive(cell: string) {
+export function isCellActive(cell: Block["color"]) {
   return String(cell).endsWith(ACTIVE_CELL_SUFFIX);
+}
+
+export function isCellGhost(cell: Block["color"]) {
+  return String(cell).endsWith(GHOST_CELL_SUFFIX);
+}
+
+export function isCellActiveOrGhost(cell: Block["color"]) {
+  return isCellActive(cell) || isCellGhost(cell);
 }

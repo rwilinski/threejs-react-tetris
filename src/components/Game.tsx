@@ -5,7 +5,7 @@ import { CellRounded } from "./CellRounded";
 import { useCameraShake } from "../contexts/CameraShakeContext";
 import { useRenderBillboard } from "../contexts/RenderBillboard";
 import { useStore } from "../game/store";
-import { isCellActive, rotateBlock } from "../game/blocks";
+import { isCellActiveOrGhost, rotateBlock } from "../game/blocks";
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -41,7 +41,7 @@ export function Game() {
 
       const cell = state.board[item[1] + 1][item[0]];
 
-      return cell === "" || isCellActive(cell);
+      return cell === "" || isCellActiveOrGhost(cell);
     });
   };
 
@@ -69,7 +69,7 @@ export function Game() {
 
       const cell = state.board[item[1]][item[0]];
 
-      return cell === "" || isCellActive(cell);
+      return cell === "" || isCellActiveOrGhost(cell);
     });
 
     if (canRotate) {
@@ -82,7 +82,7 @@ export function Game() {
     const canMove = state.currentBlock?.path.every((item) => {
       const cell = state.board[item[1]][item[0] - 1];
 
-      return cell === "" || isCellActive(cell);
+      return cell === "" || isCellActiveOrGhost(cell);
     });
 
     if (canMove) {
@@ -95,7 +95,7 @@ export function Game() {
     const canMove = state.currentBlock?.path.every((item) => {
       const cell = state.board[item[1]][item[0] + 1];
 
-      return cell === "" || isCellActive(cell);
+      return cell === "" || isCellActiveOrGhost(cell);
     });
 
     if (canMove) {

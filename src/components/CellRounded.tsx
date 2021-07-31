@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { RoundedBox } from "@react-three/drei";
 
-import { BOX_SIZE } from "../game/constants";
-import { Block, getColorById } from "../game/blocks";
+import { BOX_SIZE, COLORS } from "../game/constants";
+import { Block, getColorById, isCellGhost } from "../game/blocks";
 
 type CellRoundedType = {
   position: [number, number, number];
@@ -24,7 +24,9 @@ function CellRoundedNoMemo({
       {...props}
     >
       <meshStandardMaterial
-        color={getColorById(blockId)}
+        color={
+          isCellGhost(blockId) ? COLORS.GHOST_BLOCK : getColorById(blockId)
+        }
         roughness={0.75}
         metalness={0.5}
       />

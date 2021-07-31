@@ -12,6 +12,7 @@ export const NORMAL_SPEED = 500;
 export const FAST_SPEED = 40;
 
 export const ACTIVE_CELL_SUFFIX = "_active";
+export const GHOST_CELL_SUFFIX = "_ghost";
 
 export const FONT = `${process.env.PUBLIC_URL}/fonts/Raleway/static/Raleway-ExtraBold.ttf`;
 
@@ -19,6 +20,7 @@ export const COLORS = {
   BACKGROUND: "#eee",
   GRID: "#787878",
   TEXT: "#191919",
+  GHOST_BLOCK: "e8e8e8",
   BILLBOARD: {
     BACKGROUND: "#4a4e4d",
     TEXT: "#fff",
