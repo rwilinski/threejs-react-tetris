@@ -29,6 +29,8 @@ function CellRoundedNoMemo({
         }
         roughness={0.75}
         metalness={0.5}
+        transparent={true}
+        opacity={isCellGhost(blockId) ? 0.4 : 1}
       />
     </RoundedBox>
   );

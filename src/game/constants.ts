@@ -17,10 +17,10 @@ export const GHOST_CELL_SUFFIX = "_ghost";
 export const FONT = `${process.env.PUBLIC_URL}/fonts/Raleway/static/Raleway-ExtraBold.ttf`;
 
 export const COLORS = {
-  BACKGROUND: "#eee",
-  GRID: "#787878",
-  TEXT: "#191919",
-  GHOST_BLOCK: "e8e8e8",
+  BACKGROUND: "#262626",
+  GRID: "#a3a3a3",
+  TEXT: "#a3a3a3",
+  GHOST_BLOCK: "#fff",
   BILLBOARD: {
     BACKGROUND: "#4a4e4d",
     TEXT: "#fff",

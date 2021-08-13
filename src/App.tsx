@@ -27,8 +27,8 @@ function App() {
     >
       <CameraShakeProvider>
         <RenderBillboardProvider>
-          <ambientLight intensity={0.4} />
-          <pointLight position={cameraPosition} intensity={1} />
+          <ambientLight intensity={0.01} />
+          <pointLight position={cameraPosition} intensity={0.9} />
 
           {isFontLoaded && (
             <>
